@@ -35,13 +35,13 @@ namespace CS2312 {
             typedef std::forward_iterator_tag iterator_category;
             typedef size_type difference_type;
 
-            iterator(pointer ptr);
-            self_type operator++();
-            self_type operator++(int junk);
-            reference operator*();
-            pointer operator->();
-            bool operator==(const self_type& rhs) const;
-            bool operator!=(const self_type& rhs) const;
+            iterator(pointer ptr){};
+            self_type operator++(){};
+            self_type operator++(int junk){};
+            reference operator*(){};
+            pointer operator->(){};
+            bool operator==(const self_type& rhs) const{};
+            bool operator!=(const self_type& rhs) const{};
 
         private:
 
@@ -60,13 +60,13 @@ namespace CS2312 {
             typedef std::forward_iterator_tag iterator_category;
             typedef size_type difference_type;
 
-            const_iterator(pointer ptr);
-            self_type operator++();
-            self_type operator++(int junk);
-            const value_type& operator*() const;
-            const value_type* operator->() const;
-            bool operator==(const self_type& rhs) const;
-            bool operator!=(const self_type& rhs) const;
+            const_iterator(pointer ptr){};
+            self_type operator++(){};
+            self_type operator++(int junk){};
+            const value_type& operator*() const{};
+            const value_type* operator->() const{};
+            bool operator==(const self_type& rhs) const{};
+            bool operator!=(const self_type& rhs) const{};
 
         private:
 
@@ -75,25 +75,25 @@ namespace CS2312 {
         };
 
 
-        fixed_array(size_type size);
+        fixed_array(size_type size){};
 
-        fixed_array(std::initializer_list<T> list);
+        fixed_array(std::initializer_list<T> list){};
 
-        ~fixed_array();
+        ~fixed_array(){};
 
-        size_type size() const;
+        size_type size() const{};
 
-        T& operator[](size_type index);
+        T& operator[](size_type index){};
 
-        const T& operator[](size_type index) const;
+        const T& operator[](size_type index) const{};
 
-        iterator begin();
+        iterator begin(){};
 
-        iterator end();
+        iterator end(){};
 
-        const_iterator begin() const;
+        const_iterator begin() const{};
 
-        const_iterator end() const;
+        const_iterator end() const{};
 
     private:
 
