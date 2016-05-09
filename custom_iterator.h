@@ -35,13 +35,13 @@ namespace CS2312 {
             typedef std::forward_iterator_tag iterator_category;
             typedef size_type difference_type;
 
-            iterator(pointer ptr){};
-            self_type operator++(){};
-            self_type operator++(int junk){};
-            reference operator*(){};
-            pointer operator->(){};
-            bool operator==(const self_type& rhs) const{};
-            bool operator!=(const self_type& rhs) const{};
+            iterator(pointer ptr): __ptr(ptr){};
+            self_type operator++(){++__ptr; return *this;};
+            self_type operator++(int junk){self_type temp = *this; __ptr++; return temp;};
+            reference operator*(){return *__ptr;};
+            pointer operator->(){return __ptr;};
+            bool operator==(const self_type& rhs) const{return __ptr == rhs.__ptr;};
+            bool operator!=(const self_type& rhs) const{return __ptr != rhs.__ptr;};
 
         private:
 
@@ -60,13 +60,13 @@ namespace CS2312 {
             typedef std::forward_iterator_tag iterator_category;
             typedef size_type difference_type;
 
-            const_iterator(pointer ptr){};
-            self_type operator++(){};
-            self_type operator++(int junk){};
-            const value_type& operator*() const{};
-            const value_type* operator->() const{};
-            bool operator==(const self_type& rhs) const{};
-            bool operator!=(const self_type& rhs) const{};
+            const_iterator(pointer ptr): __ptr(ptr){};
+            self_type operator++(){++__ptr; return *this; };
+            self_type operator++(int junk){self_type temp = *this; __ptr++; return temp; };
+            const value_type& operator*() const{return *__ptr; };
+            const value_type* operator->() const{return __ptr; };
+            bool operator==(const self_type& rhs) const{return __ptr == rhs.__ptr; };
+            bool operator!=(const self_type& rhs) const{return __ptr != rhs.__ptr; };
 
         private:
 
@@ -75,25 +75,33 @@ namespace CS2312 {
         };
 
 
-        fixed_array(size_type size){};
+        fixed_array(size_type size): __size(size){__data = new T [__size]; };
 
-        fixed_array(std::initializer_list<T> list){};
+        fixed_array(std::initializer_list<T> list): __size(list.size()){
 
-        ~fixed_array(){};
+            std::vector<T> vector(list);
+            __data = new T [__size];
 
-        size_type size() const{};
+            for (int i = 0; i < vector.size(); i++){
+                __data[i] = vector[i];
+            }
+        };
 
-        T& operator[](size_type index){};
+        ~fixed_array(){delete [] __data; };
 
-        const T& operator[](size_type index) const{};
+        size_type size() const{return __size; };
 
-        iterator begin(){};
+        T& operator[](size_type index){return __data[index]; };
 
-        iterator end(){};
+        const T& operator[](size_type index) const{return __data[index]; };
 
-        const_iterator begin() const{};
+        iterator begin(){return &__data[0]; };
 
-        const_iterator end() const{};
+        iterator end(){return &__data[__size]; };
+
+        const_iterator begin() const{return &__data[0]; };
+
+        const_iterator end() const{return &__data[__size]; };
 
     private:
 
